@@ -5,7 +5,7 @@ package ru.job4j;
  *
  * @author Ivan Belov (ivan@belov.org)
  * @version $Id$
- * @since 0.1
+ * @since 19.01.2018
  */
 public class Calculate {
     /**
