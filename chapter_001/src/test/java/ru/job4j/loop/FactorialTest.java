@@ -10,7 +10,6 @@ import static org.junit.Assert.assertThat;
  * @since 28.01.2018
  */
 
-
 public class FactorialTest {
     @Test
     public void whenCalculateFactorialForFiveThenOneHundreedTwenty() {
