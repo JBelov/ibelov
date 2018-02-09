@@ -5,7 +5,7 @@ public class FindLoop {
 
     int rsl = -1; // если элемента нет в массиве, то возвращаем -1.
 
-    for (int index = 1; index != data.length; index++) {
+    for (int index = 0; index != data.length; index++) {
         if (data[index] == el) {
             rsl = index;
 
