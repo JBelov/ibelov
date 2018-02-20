@@ -24,4 +24,15 @@ public class ArrayCharTest {
         boolean result = word.startWith("Hi");
         assertThat(result, is(false));
     }
+
+    @Test
+    public void whenNotContainsWordThenFalse() {
+        boolean result = ArrayChar.contains("Hello", "Hi");
+        assertThat(result, is(false));
+    }
+    @Test
+    public void whenContainsWordThenTrue() {
+        boolean result = ArrayChar.contains("Hello", "ll");
+        assertThat(result, is(true));
+    }
 }
