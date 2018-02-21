@@ -40,7 +40,7 @@ public class ArrayChar {
         boolean result = false; // конечный результат.
         char[] originArray = origin.toCharArray(); // массив из проверяемого слова.
         char[] subArray = sub.toCharArray(); // массив из проверяемого фрагмента.
-        for (int out = 0; out < originArray.length - subArray.length; out++) {
+        for (int out = 0; (out < originArray.length - subArray.length) && !result; out++) {
             boolean preResult = true; // промежуточный результат для внутреннего цикла.
             for (int in = 0; in < subArray.length; in++) {
                 if (subArray[in] != originArray[in + out]) {
