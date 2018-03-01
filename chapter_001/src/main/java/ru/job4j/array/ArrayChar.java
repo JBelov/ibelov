@@ -14,6 +14,8 @@ public class ArrayChar {
         this.data = line.toCharArray();
     }
 
+    // test, python rulezz, pep8 for all!!11
+
     /**
      * Проверяет. что слово начинается с префикса.
      * @param prefix префикс.
