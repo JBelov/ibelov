@@ -7,19 +7,16 @@ package ru.job4j.array;
  */
 
 public class Square {
+    /**
+     * Построение массива с квадратами чисел от 1 до bound.
+     * @param bound величина массива
+     * @return массив квадратов чисел.
+     */
     public int[] calculate(int bound) {
-
-        int[] rsl = new int[bound];
-
+        int[] result = new int[bound];
         for (int index = 0; index != bound; index++) {
-
-            rsl[index] = (index + 1) * (index + 1);
-
+            result[index] = (index + 1) * (index + 1);
         }
-
-        return rsl;
-
+        return result;
     }
-
-
 }

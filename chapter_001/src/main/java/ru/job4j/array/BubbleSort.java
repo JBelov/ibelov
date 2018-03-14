@@ -7,6 +7,11 @@ package ru.job4j.array;
  */
 
 public class BubbleSort {
+    /**
+     * Сортировка массива "пузырьком".
+     * @param array исходный массив.
+     * @return отсортированный массив.
+     */
     public static int[] sort(int[] array) {
         for (int outside = 1; outside < array.length; outside++) {
             for (int inside = 0; inside < array.length - outside; inside++) {
@@ -20,6 +25,5 @@ public class BubbleSort {
         }
         return array;
     }
-
 
 }

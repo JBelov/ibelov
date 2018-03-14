@@ -9,6 +9,13 @@ import java.util.Arrays;
  */
 
 public class ArrayDuplicate {
+    /**
+     * Удаляет дубликаты из массива.
+     * @param array исходный массив.
+     * @return массив без дубликатов.
+     * out - индекс для внешнего цикла
+     * in - индекс для внутреннего цикла.
+     */
     public static String[] remove(String[] array) {
         int shift = array.length;
         for (int out = 0; out < shift; out++) {

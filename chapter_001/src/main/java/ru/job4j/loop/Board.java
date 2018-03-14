@@ -7,24 +7,25 @@ package ru.job4j.loop;
  */
 
 public class Board {
+    /**
+     * Построение шахматной доски.
+     * @param width ширина доски.
+     * @param height высота доски.
+     * @return строка для вывода шахматной доски в консоль.
+     */
     public String paint(int width, int height) {
         StringBuilder screen = new StringBuilder();
-        String ln = System.lineSeparator();
-
-
+        String newLine = System.lineSeparator();
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-
                 if ((i + j) % 2 == 0) {
                     screen.append("x");
                 } else {
                     screen.append(" ");
                 }
             }
-            // добавляем перевод на новую строку.
-            screen.append(ln);
+            screen.append(newLine);
         }
-
         return screen.toString();
     }
 }

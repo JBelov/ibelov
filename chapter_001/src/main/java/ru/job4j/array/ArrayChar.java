@@ -37,18 +37,18 @@ public class ArrayChar {
      */
     public static boolean contains(String origin, String sub) {
 
-        boolean result = false; // конечный результат.
-        char[] originArray = origin.toCharArray(); // массив из проверяемого слова.
-        char[] subArray = sub.toCharArray(); // массив из проверяемого фрагмента.
+        boolean result = false;
+        char[] originArray = origin.toCharArray();
+        char[] subArray = sub.toCharArray();
         for (int out = 0; (out < originArray.length - subArray.length) && !result; out++) {
-            boolean preResult = true; // промежуточный результат для внутреннего цикла.
+            boolean preResult = true;
             for (int in = 0; in < subArray.length; in++) {
                 if (subArray[in] != originArray[in + out]) {
                     preResult = false;
                 }
             }
             if (preResult) {
-                result = true; // если промежуточный результат после внутреннего цикла true, то конечный результат тоже.
+                result = true;
             }
         }
         return result;
