@@ -10,7 +10,7 @@ public class Profession {
      * @param name Имя.
      * getName возвращает имя.
      */
-    public String name;
+    private String name;
     public String getName() {
         return this.name;
     }
