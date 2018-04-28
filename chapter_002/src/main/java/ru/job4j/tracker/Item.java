@@ -13,6 +13,11 @@ public class Item {
     private long created;
     public Item() {
     }
+    public Item (String name, String desc) {
+        this.name = name;
+        this.desc = desc;
+        this.created = System.currentTimeMillis();
+    }
     public Item (String name, String desc, long created) {
         this.name = name;
         this.desc = desc;

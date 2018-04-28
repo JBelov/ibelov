@@ -48,6 +48,7 @@ private static final Random RN = new Random(100);
         for (int index = 0; index < this.items.length; index++) {
             if (items[index].getId().equals(id)) {
                 items[index] = item;
+                items[index].setId(id);
                 break;
             }
         }
