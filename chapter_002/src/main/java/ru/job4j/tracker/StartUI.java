@@ -46,7 +46,7 @@ public class StartUI {
      */
     private final Tracker tracker;
     
-    private final String NL = System.lineSeparator();
+    private static final String NL = System.lineSeparator();
 
     /**
      * Конструтор инициализирующий поля.
@@ -186,15 +186,15 @@ public class StartUI {
     }
 
     private void showMenu() {
-        System.out.println("MAIN MENU." + NL +
-                "0. Add new Item" + NL +
-                "1. Show all items" + NL +
-                "2. Edit item" + NL +
-                "3. Delete item" + NL +
-                "4. Find item by Id" + NL +
-                "5. Find items by name" + NL +
-                "6. Exit Program" +
-                "");
+        System.out.println("MAIN MENU." + NL
+                + "0. Add new Item" + NL
+                + "1. Show all items" + NL
+                + "2. Edit item" + NL
+                + "3. Delete item" + NL
+                + "4. Find item by Id" + NL
+                + "5. Find items by name" + NL
+                + "6. Exit Program"
+                );
     }
 
     /**
