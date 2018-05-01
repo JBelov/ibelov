@@ -10,10 +10,10 @@ import java.util.Random;
 
 public class Tracker {
     /**
- * Массив для хранение заявок.
- */
-private final Item[] items = new Item[100];
-private static final Random RN = new Random(100);
+     * Массив для хранение заявок.
+     */
+    private final Item[] items = new Item[100];
+    private static final Random RN = new Random(100);
 
     /**
      * Указатель ячейки для новой заявки.
@@ -22,6 +22,7 @@ private static final Random RN = new Random(100);
 
     /**
      * Метод реализаущий добавление заявки в хранилище
+     *
      * @param item новая заявка
      */
     public Item add(Item item) {
@@ -33,6 +34,7 @@ private static final Random RN = new Random(100);
     /**
      * Метод генерирует уникальный ключ для заявки.
      * Так как у заявки нет уникальности полей, имени и описание. Для идентификации нам нужен уникальный ключ.
+     *
      * @return Уникальный ключ.
      */
     private String generateId() {
@@ -41,7 +43,8 @@ private static final Random RN = new Random(100);
 
     /**
      * Метод заменяет заявку по заданному id.
-     * @param id идентификатор заявки, которую нужно заменить.
+     *
+     * @param id   идентификатор заявки, которую нужно заменить.
      * @param item заявка на которую заменяем.
      */
     public void replace(String id, Item item) {
@@ -56,6 +59,7 @@ private static final Random RN = new Random(100);
 
     /**
      * Метод удаляет заявку по заданному id.
+     *
      * @param id идентификатор заявки, которую удаляем.
      */
     public void delete(String id) {
@@ -71,6 +75,7 @@ private static final Random RN = new Random(100);
 
     /**
      * Метод возвращает заявку по заданному id.
+     *
      * @param id идентификатор заявки.
      * @return возвращаемая заявка.
      */
@@ -87,6 +92,7 @@ private static final Random RN = new Random(100);
 
     /**
      * Метод находит заявку по заданному имени.
+     *
      * @param name Имя заявки.
      * @return Возвращаемая заявка.
      */
@@ -103,6 +109,7 @@ private static final Random RN = new Random(100);
 
     /**
      * Метод возвращает массив из всех не пустых заявок.
+     *
      * @return Массив не пустых заявок.
      */
     public Item[] getAll() {
@@ -112,7 +119,5 @@ private static final Random RN = new Random(100);
         }
         return result;
     }
-
-
 
 }

@@ -11,18 +11,22 @@ public class Item {
     private String name;
     private String desc;
     private long created;
+
     public Item() {
     }
+
     public Item(String name, String desc) {
         this.name = name;
         this.desc = desc;
         this.created = System.currentTimeMillis();
     }
+
     public Item(String name, String desc, long created) {
         this.name = name;
         this.desc = desc;
         this.created = created;
     }
+
     public String getName() {
         return this.name;
     }
@@ -38,6 +42,7 @@ public class Item {
     public String getId() {
         return this.id;
     }
+
     public void setId(String id) {
         this.id = id;
     }

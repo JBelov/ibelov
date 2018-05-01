@@ -1,4 +1,5 @@
 package ru.job4j.tracker;
+
 import java.util.Date;
 
 /**
@@ -45,12 +46,13 @@ public class StartUI {
      * Хранилище заявок.
      */
     private final Tracker tracker;
-    
+
     private static final String NL = System.lineSeparator();
 
     /**
      * Конструтор инициализирующий поля.
-     * @param input ввод данных.
+     *
+     * @param input   ввод данных.
      * @param tracker хранилище заявок.
      */
     public StartUI(Input input, Tracker tracker) {
@@ -175,7 +177,7 @@ public class StartUI {
      */
     private void getAllItems() {
         for (Item item : this.tracker.getAll()
-             ) {
+                ) {
             System.out.println(NL + "------------ Заявка (ID: " + item.getId() + ")----------");
             Date date = new Date(item.getCreated());
             System.out.println("Время создания: " + date);
@@ -194,11 +196,12 @@ public class StartUI {
                 + "4. Find item by Id" + NL
                 + "5. Find items by name" + NL
                 + "6. Exit Program"
-                );
+        );
     }
 
     /**
      * Запускт программы.
+     *
      * @param args
      */
     public static void main(String[] args) {
