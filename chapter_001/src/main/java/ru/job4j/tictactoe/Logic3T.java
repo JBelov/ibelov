@@ -8,9 +8,7 @@ public class Logic3T {
     }
 
     private boolean checkDiagonalX() {
-        boolean right, left;
-        right = true;
-        left = true;
+        boolean right = true, left = true;
         for (int i = 0; i < table.length; i++) {
             right &= (table[i][i].hasMarkX());
             left &= (table[table.length - i - 1][i].hasMarkX());
@@ -19,10 +17,8 @@ public class Logic3T {
     }
 
     private boolean checkLinesX() {
-        boolean cols, rows;
         for (int col = 0; col < table.length; col++) {
-            cols = true;
-            rows = true;
+            boolean cols = true, rows = true;
             for (int row = 0; row < table.length; row++) {
                 cols &= (table[col][row].hasMarkX());
                 rows &= (table[row][col].hasMarkX());
@@ -31,14 +27,11 @@ public class Logic3T {
                 return true;
             }
         }
-
         return false;
     }
 
     private boolean checkDiagonalO() {
-        boolean right, left;
-        right = true;
-        left = true;
+        boolean right = true, left = true;
         for (int i = 0; i < table.length; i++) {
             right &= (table[i][i].hasMarkO());
             left &= (table[table.length - i - 1][i].hasMarkO());
@@ -47,10 +40,8 @@ public class Logic3T {
     }
 
     private boolean checkLinesO() {
-        boolean cols, rows;
         for (int col = 0; col < table.length; col++) {
-            cols = true;
-            rows = true;
+            boolean cols = true, rows = true;
             for (int row = 0; row < table.length; row++) {
                 cols &= (table[col][row].hasMarkO());
                 rows &= (table[row][col].hasMarkO());
