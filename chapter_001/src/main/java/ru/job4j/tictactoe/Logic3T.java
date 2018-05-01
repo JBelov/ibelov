@@ -72,7 +72,7 @@ public class Logic3T {
 
     public boolean hasGap() {
         Boolean result = false;
-        for (Figure3T rows[] : table) {
+        for (Figure3T[] rows : table) {
             for (Figure3T point : rows) {
                 if (!point.hasMarkO() && !point.hasMarkX()) {
                     result = true;
