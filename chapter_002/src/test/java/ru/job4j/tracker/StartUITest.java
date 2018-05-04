@@ -14,14 +14,13 @@ import static org.junit.Assert.assertThat;
 public class StartUITest {
 
     private static final String NL = System.lineSeparator();
-    private static final String MENU = "MAIN MENU." + NL
-                                + "0. Add new Item" + NL
-                                + "1. Show all items" + NL
-                                + "2. Edit item" + NL
-                                + "3. Delete item" + NL
-                                + "4. Find item by Id" + NL
-                                + "5. Find items by name" + NL
-                                + "6. Exit Program" + NL;
+    private static final String MENU = "0. Add the new item." + NL
+            + "1. Show all items." + NL
+            + "2. Edit item." + NL
+            + "3. Delete item." + NL
+            + "4. Find item by ID." + NL
+            + "5. Find item by name." + NL
+            + "6. Exit Program." + NL;
 
 
     // поле содержит дефолтный вывод в консоль.
