@@ -70,5 +70,4 @@ public class TrackerTest {
         assertThat(tracker.findById(firstItem.getId()), is(firstItem));
     }
 
-
 }
