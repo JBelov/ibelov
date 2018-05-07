@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import com.sun.xml.internal.rngom.parse.host.Base;
+
 import java.util.Date;
 
 /**
@@ -11,13 +13,13 @@ import java.util.Date;
 /**
  * Внешний класс для редактирования элемента.
  */
-class EditItem implements UserAction {
+class EditItem extends BaseAction {
+
+    public EditItem(int key, String name) {
+        super(key, name);
+    }
 
     private final static String NL = System.lineSeparator();
-
-    public int key() {
-        return 2;
-    }
 
     public void execute(Input input, Tracker tracker) {
         System.out.println(NL + "------------ Редактирование новой заявки --------------");
@@ -36,22 +38,18 @@ class EditItem implements UserAction {
             System.out.println("Ошибка: не верный id" + NL);
         }
     }
-
-    public String info() {
-        return String.format("%s. %s", key(), "Edit item.");
-    }
 }
 
 /**
  * Внешний класс для удаления элемента.
  */
-class DeleteItem implements UserAction {
+class DeleteItem extends BaseAction {
+
+    public DeleteItem(int key, String name) {
+        super(key, name);
+    }
 
     private final static String NL = System.lineSeparator();
-
-    public int key() {
-        return 3;
-    }
 
     public void execute(Input input, Tracker tracker) {
         System.out.println(NL + "-------------- Удаление заявки --------------");
@@ -63,22 +61,18 @@ class DeleteItem implements UserAction {
             System.out.println("Ошибка: не верный id" + NL);
         }
     }
-
-    public String info() {
-        return String.format("%s. %s", key(), "Delete item.");
-    }
 }
 
 /**
  * Внешний класс для поиска элемента по ID.
  */
-class FindItemById implements UserAction {
+class FindItemById extends BaseAction {
+
+    public FindItemById(int key, String name) {
+        super(key, name);
+    }
 
     private final static String NL = System.lineSeparator();
-
-    public int key() {
-        return 4;
-    }
 
     public void execute(Input input, Tracker tracker) {
         System.out.println(NL + "------------ Поиск заявки по id --------------");
@@ -93,22 +87,18 @@ class FindItemById implements UserAction {
             System.out.println("Ошибка: не верный id" + NL);
         }
     }
-
-    public String info() {
-        return String.format("%s. %s", key(), "Find item by ID.");
-    }
 }
 
 /**
  * Внешний класс для поиска элемента по имени.
  */
-class FindItemByName implements UserAction {
+class FindItemByName extends BaseAction {
+
+    public FindItemByName(int key, String name) {
+        super(key, name);
+    }
 
     private final static String NL = System.lineSeparator();
-
-    public int key() {
-        return 5;
-    }
 
     public void execute(Input input, Tracker tracker) {
         System.out.println(NL + "------------ Поиск заявки по имени --------------");
@@ -122,10 +112,6 @@ class FindItemByName implements UserAction {
         } else {
             System.out.println("Ошибка: нет заявок с таким именем" + NL);
         }
-    }
-
-    public String info() {
-        return String.format("%s. %s", key(), "Find item by name.");
     }
 }
 
@@ -149,13 +135,13 @@ public class MenuTracker {
      * Инициализация элементов меню внутренними классами.
      */
     public void fillActions() {
-        this.actions[0] = this.new AddItem();
-        this.actions[1] = new MenuTracker.ShowItems();
-        this.actions[2] = new EditItem();
-        this.actions[3] = new DeleteItem();
-        this.actions[4] = new FindItemById();
-        this.actions[5] = new FindItemByName();
-        this.actions[6] = new ExitProgram();
+        this.actions[0] = this.new AddItem(0, "Add the new item.");
+        this.actions[1] = new MenuTracker.ShowItems(1, "Show all items.");
+        this.actions[2] = new EditItem(2, "Edit item.");
+        this.actions[3] = new DeleteItem(3, "Delete item.");
+        this.actions[4] = new FindItemById(4, "Find item by ID.");
+        this.actions[5] = new FindItemByName(5, "Find item by name.");
+        this.actions[6] = new ExitProgram(6, "Exit Program.");
 
     }
 
@@ -174,10 +160,10 @@ public class MenuTracker {
     /**
      * Внутренний класс реализующий добавление элемента.
      */
-    private class AddItem implements UserAction {
+    private class AddItem extends BaseAction {
 
-        public int key() {
-            return 0;
+        private AddItem(int key, String name) {
+            super(key, name);
         }
 
         public void execute(Input input, Tracker tracker) {
@@ -193,36 +179,28 @@ public class MenuTracker {
             System.out.println("Описание заявки: " + item.getDesc() + NL);
 
         }
-
-        public String info() {
-            return String.format("%s. %s", key(), "Add the new item.");
-        }
     }
 
     /**
      * Внутренний класс для выхода из программы.
      */
-    private class ExitProgram implements UserAction {
+    private class ExitProgram extends BaseAction {
 
-        public int key() {
-            return 6;
+        private ExitProgram(int key, String name) {
+            super(key, name);
         }
 
         public void execute(Input input, Tracker tracker) {
-        }
-
-        public String info() {
-            return String.format("%s. %s", key(), "Exit Program.");
         }
     }
 
     /**
      * Внутренний класс реализующий отображение всех элементов.
      */
-    private static class ShowItems implements UserAction {
+    private static class ShowItems extends BaseAction {
 
-        public int key() {
-            return 1;
+        private ShowItems(int key, String name) {
+            super(key, name);
         }
 
         public void execute(Input input, Tracker tracker) {
@@ -234,10 +212,6 @@ public class MenuTracker {
                 System.out.println("Описание заявки: " + item.getDesc() + NL);
 
             }
-        }
-
-        public String info() {
-            return String.format("%s. %s", key(), "Show all items.");
         }
     }
 }
