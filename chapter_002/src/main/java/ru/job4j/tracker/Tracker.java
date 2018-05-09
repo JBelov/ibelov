@@ -9,11 +9,16 @@ import java.util.Random;
  */
 
 public class Tracker {
+
+    /**
+     * Генератор случайных чисел для ID.
+     */
+    private static final Random RN = new Random(100);
+
     /**
      * Массив для хранение заявок.
      */
     private final Item[] items = new Item[100];
-    private static final Random RN = new Random(100);
 
     /**
      * Указатель ячейки для новой заявки.
