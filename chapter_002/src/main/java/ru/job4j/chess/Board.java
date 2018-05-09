@@ -70,45 +70,28 @@ public class Board {
      * @throws FigureNotFoundException В начальной клетке фигура не найдена.
      */
     boolean move(Cell source, Cell dest) throws ImpossibleMoveException, OccupiedWayException, FigureNotFoundException {
-
         Figure figure = checkCell(source);
         boolean result = false;
-
         try {
-            //Если в начальной клетке фигуры нет, выбрасываем исключение.
             if (figure == null) {
                 throw new FigureNotFoundException();
             }
-            //Получаем путь движения фигуры.
             Cell[] way = figure.way(source, dest);
-
-            //Если на пути фигуры есть не пустые клетки, выбрасываем исключени.
             for (Cell cell : way) {
                 Figure anotherFigure = checkCell(cell);
                 if (anotherFigure != null) {
                     throw new OccupiedWayException();
                 }
             }
-
-            //Если нет ошибок, то присваем старой переменной в массиве фигур новую фигуру с новыми координатами.
             figures[getIndexCell(source)] = figure.copy(dest);
-
             result = true;
-
-
         } catch (FigureNotFoundException fnf) {
             System.out.println("FigureNotFoundException");
-
         } catch (ImpossibleMoveException ime) {
             System.out.println("ImpossibleMoveException");
-
         } catch (OccupiedWayException owe) {
             System.out.println("OccupiedWayException");
-
         }
-
         return result;
     }
-
-
 }

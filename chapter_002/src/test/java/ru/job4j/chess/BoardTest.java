@@ -62,9 +62,7 @@ public class BoardTest {
         Bishop bishop2 = new Bishop(occupiedCell);
         board.add(bishop);
         board.add(bishop2);
-
         boolean result = board.move(source, dest);
-
         assertThat(result, is(false));
     }
 }
