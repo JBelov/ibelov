@@ -2,31 +2,32 @@ package ru.job4j.chess;
 
 import org.junit.Test;
 import ru.job4j.chess.figures.Bishop;
+import ru.job4j.chess.figures.Rook;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
-public class BoardTest {
+public class RookTest {
 
     @Test
-    public void whenBishopMovesCorrectly() {
+    public void whenRookMovesCorrectly() {
         Board board = new Board();
         Cell source = new Cell(1, 1);
-        Cell dest = new Cell(5, 5);
-        Bishop bishop = new Bishop(source);
-        board.add(bishop);
+        Cell dest = new Cell(1, 6);
+        Rook rook = new Rook(source);
+        board.add(rook);
         assertThat(board.move(source, dest), is(true));
     }
 
     @Test
-    public void whenBishopMovesThreeTimes() {
+    public void whenRookMovesThreeTimes() {
         Board board = new Board();
-        Cell source = new Cell(1, 1);
-        Cell dest = new Cell(3, 3);
-        Cell dest2 = new Cell(5, 1);
-        Cell dest3 = new Cell(1, 5);
-        Bishop bishop = new Bishop(source);
-        board.add(bishop);
+        Cell source = new Cell(5, 5);
+        Cell dest = new Cell(1, 5);
+        Cell dest2 = new Cell(1, 1);
+        Cell dest3 = new Cell(4, 1);
+        Rook rook = new Rook(source);
+        board.add(rook);
         board.move(source, dest);
         board.move(dest, dest2);
         assertThat(board.move(dest2, dest3), is(true));
@@ -37,8 +38,8 @@ public class BoardTest {
         Board board = new Board();
         Cell source = new Cell(1, 1);
         Cell dest = new Cell(5, 5);
-        Bishop bishop = new Bishop(source);
-        board.add(bishop);
+        Rook rook = new Rook(source);
+        board.add(rook);
         assertThat(board.move(dest, source), is(false));
     }
 
@@ -46,22 +47,22 @@ public class BoardTest {
     public void whenBishopImpossibleMove() {
         Board board = new Board();
         Cell source = new Cell(1, 1);
-        Cell dest = new Cell(6, 7);
-        Bishop bishop = new Bishop(source);
-        board.add(bishop);
+        Cell dest = new Cell(2, 6);
+        Rook rook = new Rook(source);
+        board.add(rook);
         assertThat(board.move(source, dest), is(false));
     }
 
     @Test
-    public void whenBishopMeetsAnotherBishopOnHisWay() {
+    public void whenRookMeetsBishopOnTheWay() {
         Board board = new Board();
-        Cell source = new Cell(7, 7);
+        Cell source = new Cell(1, 7);
         Cell dest = new Cell(1, 1);
-        Cell occupiedCell = new Cell(3, 3);
-        Bishop bishop = new Bishop(source);
-        Bishop bishop2 = new Bishop(occupiedCell);
+        Cell occupiedCell = new Cell(1, 4);
+        Rook rook = new Rook(source);
+        Bishop bishop = new Bishop(occupiedCell);
+        board.add(rook);
         board.add(bishop);
-        board.add(bishop2);
         boolean result = board.move(source, dest);
         assertThat(result, is(false));
     }
