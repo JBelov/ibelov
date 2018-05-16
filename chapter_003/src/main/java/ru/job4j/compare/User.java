@@ -1,7 +1,5 @@
 package ru.job4j.compare;
 
-import java.util.Comparator;
-
 /**
  * @author Ivan Belov (ivan@belov.org)
  * @version $Id$
