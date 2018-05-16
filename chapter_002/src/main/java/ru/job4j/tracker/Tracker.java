@@ -1,5 +1,6 @@
 package ru.job4j.tracker;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -18,7 +19,7 @@ public class Tracker {
     /**
      * Массив для хранение заявок.
      */
-    private final Item[] items = new Item[100];
+    private final ArrayList<Item> items = new ArrayList<>();
 
     /**
      * Указатель ячейки для новой заявки.
@@ -32,7 +33,7 @@ public class Tracker {
      */
     public Item add(Item item) {
         item.setId(this.generateId());
-        this.items[this.position++] = item;
+        this.items.add(position++, item);
         return item;
     }
 
@@ -53,10 +54,10 @@ public class Tracker {
      * @param item заявка на которую заменяем.
      */
     public void replace(String id, Item item) {
-        for (int index = 0; index < this.items.length; index++) {
-            if (items[index].getId().equals(id)) {
-                items[index] = item;
-                items[index].setId(id);
+        for (int index = 0; index < items.size(); index++) {
+            if (items.get(index).getId().equals(id)) {
+                items.set(index, item);
+                items.get(index).setId(id);
                 break;
             }
         }
@@ -68,10 +69,9 @@ public class Tracker {
      * @param id идентификатор заявки, которую удаляем.
      */
     public void delete(String id) {
-        for (int index = 0; index < this.items.length; index++) {
-            if (items[index].getId().equals(id)) {
-                System.arraycopy(items, index + 1, items, index, items.length - index - 1);
-                items[items.length - 1] = null;
+        for (int index = 0; index < this.items.size(); index++) {
+            if (items.get(index).getId().equals(id)) {
+                items.remove(index);
                 position--;
                 break;
             }
@@ -117,12 +117,8 @@ public class Tracker {
      *
      * @return Массив не пустых заявок.
      */
-    public Item[] getAll() {
-        Item[] result = new Item[this.position];
-        for (int index = 0; index != this.position; index++) {
-            result[index] = this.items[index];
-        }
-        return result;
+    public ArrayList<Item> getAll() {
+        return this.items;
     }
 
 }

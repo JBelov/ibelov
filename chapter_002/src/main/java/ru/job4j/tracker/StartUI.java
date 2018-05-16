@@ -17,7 +17,7 @@ public class StartUI {
      */
     private final Tracker tracker;
 
-    private int[] range = new int[] {0, 1, 2, 3, 4, 5, 6};
+    private int[] range = new int[]{0, 1, 2, 3, 4, 5, 6};
 
 
     /**
