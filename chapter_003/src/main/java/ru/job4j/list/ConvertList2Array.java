@@ -1,7 +1,5 @@
 package ru.job4j.list;
 
-import sun.jvm.hotspot.utilities.IntArray;
-
 import static java.lang.Math.ceil;
 
 import java.util.*;

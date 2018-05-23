@@ -1,5 +1,7 @@
+[![Build Status](https://travis-ci.org/JBelov/ibelov.svg?branch=master)](https://travis-ci.org/JBelov/ibelov)
+[![codecov](https://codecov.io/gh/JBelov/ibelov/branch/master/graph/badge.svg)](https://codecov.io/gh/JBelov/ibelov)
+
 # ibelov
 
-Репозиторий Ивана Белова.
+Ivan Belov. Java repository.
 
-Планирую закончить данный курс job4j.ru до Июля 2018 года.
