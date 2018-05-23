@@ -29,7 +29,8 @@ public class BankTest {
         bank.deleteAccountFromUser("5941549", account2);
         bank.deleteUser(user2);
 
-        assertThat(bank.getUserAccounts("5941549") + " " + bank.getUserAccounts("7589437"), is(
+        assertThat(bank.getUserAccounts("5941549") + " "
+                + bank.getUserAccounts("7589437"), is(
                 "[Счет: 6421678449668 Баланс: 10000.0, Счет: 8463763782226 Баланс: 30000.0] null"
         ));
     }
@@ -47,11 +48,21 @@ public class BankTest {
         bank.addAccountToUser("5941549", account1);
         bank.addAccountToUser("5941549", account2);
         bank.addAccountToUser("7589437", account4);
-        bank.transferMoney("5941549", "6421678449668", "5941549", "9474823476746", 5000);
-        bank.transferMoney("5941549", "9474823476746", "7589437", "8463763782226", 6000);
+        bank.transferMoney("5941549",
+                "6421678449668",
+                "5941549",
+                "9474823476746",
+                5000);
+        bank.transferMoney("5941549",
+                "9474823476746",
+                "7589437",
+                "8463763782226",
+                6000);
 
-        assertThat(bank.getUserAccounts("5941549") + " " + bank.getUserAccounts("7589437"), is(
-                "[Счет: 6421678449668 Баланс: 5000.0, Счет: 9474823476746 Баланс: 19000.0] [Счет: 8463763782226 Баланс: 46000.0]"
+        assertThat(bank.getUserAccounts("5941549") + " "
+                + bank.getUserAccounts("7589437"), is(
+                "[Счет: 6421678449668 Баланс: 5000.0, Счет: 9474823476746 Баланс: 19000.0] "
+                        + "[Счет: 8463763782226 Баланс: 46000.0]"
         ));
     }
 
@@ -67,9 +78,12 @@ public class BankTest {
         bank.addAccountToUser("5941549", account1);
         bank.addAccountToUser("7589437", account4);
 
-        assertThat(bank.transferMoney("5941549", "6421678449668", "7589437", "8463763782226", 20000), is(
-                false
-        ));
+        assertThat(bank.transferMoney("5941549",
+                "6421678449668",
+                "7589437",
+                "8463763782226",
+                20000),
+                is(false));
     }
 
     @Test
@@ -80,9 +94,11 @@ public class BankTest {
         Account account1 = new Account("6421678449668", 10000);
         bank.addAccountToUser("5941549", account1);
 
-        assertThat(bank.transferMoney("5941549", "6421678449668", "7589437", "8463763782226", 20000), is(
-                false
-        ));
+        assertThat(bank.transferMoney("5941549",
+                "6421678449668",
+                "7589437",
+                "8463763782226",
+                20000), is(false));
     }
 
 

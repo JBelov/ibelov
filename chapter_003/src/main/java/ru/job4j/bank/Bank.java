@@ -78,13 +78,20 @@ public class Bank {
         return null;
     }
 
-
+    /**
+     * Добавление пользователя.
+     * @param user пользователь.
+     */
     public void addUser(User user) {
         if (checkUniquePassport(user.getPassport())) {
             map.putIfAbsent(user, new LinkedList<>());
         }
     }
 
+    /**
+     * Удаление пользователя.
+     * @param user пользователь.
+     */
     public void deleteUser(User user) {
         map.remove(user);
     }
@@ -95,6 +102,11 @@ public class Bank {
         }
     }
 
+    /**
+     * Удаление счета у пользователя.
+     * @param passport паспорт пользователя.
+     * @param account аккаунт пользователя.
+     */
     public void deleteAccountFromUser(String passport, Account account) {
         for (User user : map.keySet()) {
             if (user.getPassport().equals(passport)) {
@@ -103,6 +115,11 @@ public class Bank {
         }
     }
 
+    /**
+     * Получить все счета пользователя.
+     * @param passport паспорт пользователя.
+     * @return список всех счетов пользователя.
+     */
     public List<Account> getUserAccounts(String passport) {
         for (User user : map.keySet()) {
             if (user.getPassport().equals(passport)) {
@@ -112,7 +129,20 @@ public class Bank {
         return null;
     }
 
-    public boolean transferMoney(String srcPassport, String srcRequisite, String destPassport, String dstRequisite, double amount) {
+    /**
+     * Совершить денежный перевод.
+     * @param srcPassport паспорт отправителя.
+     * @param srcRequisite паспорт получателя.
+     * @param destPassport реквизиты отправителя.
+     * @param dstRequisite реквизиты получателя.
+     * @param amount сумма перевода.
+     * @return true если перевод успешно выполнен.
+     */
+    public boolean transferMoney(String srcPassport,
+                                 String srcRequisite,
+                                 String destPassport,
+                                 String dstRequisite,
+                                 double amount) {
         boolean result = false;
         User userSrc = getUserByPassport(srcPassport);
         User userDest = getUserByPassport(destPassport);
@@ -129,7 +159,6 @@ public class Bank {
         }
         return result;
     }
-
 }
 
 
