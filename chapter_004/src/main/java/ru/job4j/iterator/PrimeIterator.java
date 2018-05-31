@@ -33,8 +33,11 @@ public class PrimeIterator implements Iterator {
     private int getNextIndexFrom(int value) {
         if (value < values.length) {
             for (int index2 = value; index2 < values.length; index2++) {
-                int num = values[value];
                 boolean isPrime = true;
+                long num = values[index2];
+                if (num == 1) {
+                    isPrime = false;
+                }
                 for (int i = 2; i <= num / 2; i++) {
                     if (num % i == 0) {
                         isPrime = false;
