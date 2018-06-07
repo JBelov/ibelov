@@ -17,16 +17,18 @@ public class Converter {
 
             @Override
             public boolean hasNext() {
+                boolean result = false;
                 if (inner.hasNext()) {
-                    return true;
-                }
-                while (outer.hasNext()) {
-                    inner = outer.next();
-                    if (inner.hasNext()) {
-                        return true;
+                    result = true;
+                } else {
+                    while (outer.hasNext() && !result) {
+                        inner = outer.next();
+                        if (inner.hasNext()) {
+                            result = true;
+                        }
                     }
                 }
-                return false;
+                return result;
             }
 
             @Override
