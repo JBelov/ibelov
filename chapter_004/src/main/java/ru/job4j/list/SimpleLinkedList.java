@@ -4,19 +4,32 @@ import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/**
+ * @author Ivan Belov (ivan@belov.org)
+ * @version $Id$
+ * @since 0.1
+ */
+
 public class SimpleLinkedList<E> {
 
-    private int size;
+    private int size = 0;
     private int modCount = 0;
-    private SimpleLinkedList.Node<E> first;
+    private Node<E> first;
+    private Node<E> last;
 
     /**
      * Add new element in the beginning of the list.
      */
     public void add(E date) {
-        SimpleLinkedList.Node<E> newLink = new SimpleLinkedList.Node<>(date);
+        Node<E> newLink = new Node<>(date);
+        if (this.size > 0) {
+            this.first.previous = newLink;
+        }
         newLink.next = this.first;
         this.first = newLink;
+        if (this.size < 1) {
+            this.last = newLink;
+        }
         this.size++;
         this.modCount++;
     }
@@ -28,10 +41,43 @@ public class SimpleLinkedList<E> {
         if (index >= this.size) {
             throw new NoSuchElementException();
         }
-        SimpleLinkedList.Node<E> result = this.first;
+        Node<E> result = this.first;
         for (int i = 0; i < index; i++) {
             result = result.next;
         }
+        return result.date;
+    }
+
+    /**
+     * Return size of list.
+     */
+    public int getSize() {
+        return this.size;
+    }
+
+    /**
+     * Return the last added element and delete it from list.
+     */
+    public E deleteLast() {
+        if (this.size < 1) {
+            throw new NoSuchElementException();
+        }
+        Node<E> result = this.first;
+        this.first = this.first.next;
+        this.size--;
+        return result.date;
+    }
+
+    /**
+     * Return the first added element and delete it from list.
+     */
+    public E deleteFirst() {
+        if (this.size < 1) {
+            throw new NoSuchElementException();
+        }
+        Node<E> result = this.last;
+        this.last = this.last.previous;
+        this.size--;
         return result.date;
     }
 
@@ -41,7 +87,8 @@ public class SimpleLinkedList<E> {
     private static class Node<E> {
 
         E date;
-        SimpleLinkedList.Node<E> next;
+        Node<E> next;
+        Node<E> previous;
 
         Node(E date) {
             this.date = date;

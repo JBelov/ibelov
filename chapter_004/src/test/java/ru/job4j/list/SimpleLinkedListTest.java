@@ -9,6 +9,12 @@ import java.util.NoSuchElementException;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
+/**
+ * @author Ivan Belov (ivan@belov.org)
+ * @version $Id$
+ * @since 0.1
+ */
+
 public class SimpleLinkedListTest {
 
     @Test(expected = NoSuchElementException.class)
