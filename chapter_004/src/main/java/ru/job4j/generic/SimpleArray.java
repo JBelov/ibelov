@@ -14,7 +14,7 @@ public class SimpleArray<T> implements Iterable<T> {
     /**
      * Objects array and position pointer.
      */
-    final private Object[] objects;
+    private final Object[] objects;
     private int position = 0;
 
     /**
