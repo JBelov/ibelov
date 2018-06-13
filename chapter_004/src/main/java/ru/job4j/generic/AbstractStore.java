@@ -22,11 +22,11 @@ public abstract class AbstractStore<T extends Base> implements Store<T> {
     /**
      * Constructor for with current size.
      *
-     * @param currentSize maximum elements number.
+     * @param size maximum elements number.
      */
-    public AbstractStore(int currentSize) {
-        store = new SimpleArray<>(currentSize);
-        this.size = currentSize;
+    public AbstractStore(int size) {
+        store = new SimpleArray<>(size);
+        this.size = size;
     }
 
     /**
@@ -36,13 +36,9 @@ public abstract class AbstractStore<T extends Base> implements Store<T> {
      * @return Element with current id, or int -1 if no such elements.
      */
     private int findIndexById(String id) {
-        for (int index = 0; index < size; index++) {
-            try {
-                if (store.get(index).getId().equals(id)) {
-                    return index;
-                }
-            } catch (NoSuchElementException nse) {
-                return -1;
+        for (int index = 0; index < store.getSize(); index++) {
+            if (store.get(index).getId().equals(id)) {
+                return index;
             }
         }
         return -1;

@@ -39,6 +39,15 @@ public class SimpleArray<T> implements Iterable<T> {
     }
 
     /**
+     * Returns the actual size of array filled with elements.
+     *
+     * @return int size.
+     */
+    public int getSize() {
+        return this.position;
+    }
+
+    /**
      * Adding new element in array.
      *
      * @param model incoming element.
