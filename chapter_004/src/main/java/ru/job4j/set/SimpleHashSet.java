@@ -15,10 +15,6 @@ public class SimpleHashSet<E> {
      */
     private Object[] values;
     /**
-     * Number of buckets.
-     */
-    private int buckets;
-    /**
      * Current number of elements.
      */
     private int size;
@@ -32,10 +28,8 @@ public class SimpleHashSet<E> {
      */
     public SimpleHashSet() {
         this.values = new Object[4];
-        this.buckets = 4;
         this.size = 0;
         this.k = 0.75f;
-
     }
 
     /**
@@ -43,13 +37,21 @@ public class SimpleHashSet<E> {
      */
     private void extend() {
         Object[] temp = new Object[values.length * 2];
-        buckets = buckets * 2;
         for (Object e : values) {
             if (e != null) {
-                temp[e.hashCode() % buckets] = e;
+                temp[e.hashCode() & (temp.length - 1)] = e;
             }
         }
         values = temp;
+    }
+
+    /**
+     * Calculate the bucket number for some item by its hashCode.
+     *
+     * @return bucket number.
+     */
+    private int getBucket(Object e) {
+        return e.hashCode() & (values.length - 1);
     }
 
     /**
@@ -59,14 +61,14 @@ public class SimpleHashSet<E> {
      * @return True if the element has been successfully added.
      */
     public boolean add(E e) {
-        if (size >= buckets * k) {
+        if (size >= values.length * k) {
             extend();
         }
         if (!this.contains(e)) {
-            int bucket = e.hashCode() % buckets;
+            int bucket = getBucket(e);
             while (this.values[bucket] != null) {
                 this.extend();
-                bucket = e.hashCode() % buckets;
+                bucket = getBucket(e);
             }
             this.values[bucket] = e;
             size++;
@@ -82,18 +84,15 @@ public class SimpleHashSet<E> {
      * @return True in case of containing this element.
      */
     public boolean contains(E e) {
-        return Objects.equals(e, values[e.hashCode() % buckets]);
+        return Objects.equals(e, values[getBucket(e)]);
     }
 
     /**
      * Remove the element from set.
-     *
-     * @param e
-     * @return
      */
     public boolean remove(E e) {
         if (this.contains(e)) {
-            values[e.hashCode() % buckets] = null;
+            values[getBucket(e)] = null;
             size--;
             return true;
         }
