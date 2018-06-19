@@ -53,9 +53,6 @@ public class SimpleHashMap<K, V> implements Iterable<V> {
 
             @Override
             public Object next() {
-                if (itrModCount != modCount) {
-                    throw new ConcurrentModificationException();
-                }
                 if (hasNext()) {
                     return table[position++].value;
                 }
@@ -70,11 +67,11 @@ public class SimpleHashMap<K, V> implements Iterable<V> {
      * @param <K> Key class.
      * @param <V> Value Class.
      */
-    static class Node<K, V> {
-        final K key;
-        V value;
+    private static class Node<K, V> {
+        private final K key;
+        private V value;
 
-        Node(K k, V v) {
+        private Node(K k, V v) {
             this.key = k;
             this.value = v;
         }
@@ -113,7 +110,7 @@ public class SimpleHashMap<K, V> implements Iterable<V> {
     /**
      * Get the element by its key.
      */
-    V get(K key) {
+    public V get(K key) {
         if (notNull(key) && table[key.hashCode() & (capacity - 1)].key.equals(key)) {
             return table[key.hashCode() & (capacity - 1)].value;
         }
@@ -126,7 +123,7 @@ public class SimpleHashMap<K, V> implements Iterable<V> {
      * @param key key of element to delete.
      * @return true in case of successful deletion.
      */
-    boolean delete(K key) {
+    public boolean delete(K key) {
         if (notNull(key) && table[key.hashCode() & (capacity - 1)].key == key) {
             table[key.hashCode() & (capacity - 1)] = null;
             size--;
