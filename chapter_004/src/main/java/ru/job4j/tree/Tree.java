@@ -1,6 +1,5 @@
 package ru.job4j.tree;
 
-
 import java.util.*;
 
 /**
@@ -13,20 +12,6 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
 
     public Tree(E root) {
         this.root = new Node(root);
-    }
-
-    public ArrayList<E> toList() {
-        ArrayList<E> list = new ArrayList<>();
-        Queue<Node<E>> data = new LinkedList<>();
-        data.offer(this.root);
-        while (!data.isEmpty()) {
-            Node<E> el = data.poll();
-            list.add(el.getValue());
-            for (Node<E> child : el.leaves()) {
-                data.offer(child);
-            }
-        }
-        return list;
     }
 
     public boolean isBinary() {
@@ -75,6 +60,29 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return this.toList().iterator();
+        return new Iterator<E>() {
+            private Queue<Node<E>> queue = new LinkedList<>();
+            private Node<E> current = root;
+            private boolean first = true;
+
+            @Override
+            public boolean hasNext() {
+                return (!queue.isEmpty() || first);
+            }
+
+            @Override
+            public E next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
+                if (first) {
+                    queue.add(root);
+                    first = false;
+                }
+                current = queue.poll();
+                queue.addAll(current.leaves());
+                return current.getValue();
+            }
+        };
     }
 }

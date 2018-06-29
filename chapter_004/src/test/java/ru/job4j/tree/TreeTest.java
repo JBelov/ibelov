@@ -25,9 +25,6 @@ public class TreeTest {
                 tree.findBy(6).isPresent(),
                 is(true)
         );
-        for (Integer value : tree) {
-            System.out.println(value);
-        }
     }
 
     @Test
