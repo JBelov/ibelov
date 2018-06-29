@@ -13,9 +13,16 @@ import static org.junit.Assert.*;
 public class PrefixTest {
 
     @Test
-    public void find() {
+    public void whenKoteykaFound() {
         Prefix tester = new Prefix();
-        String[] input = {"кот", "котейка", "котик", "синхрофазотрон"};
-        assertThat(tester.find(input), is("котейка"));
+        String[] input = {"кот", "котейка", "котик", "синхрофазотрон", "сила"};
+        assertThat(tester.find(input, 3), is("котейка"));
+    }
+
+    @Test
+    public void whenSynchrophasotronFound() {
+        Prefix tester = new Prefix();
+        String[] input = {"кот", "котейка", "котик", "синхрофазотрон", "сила"};
+        assertThat(tester.find(input, 2), is("синхрофазотрон"));
     }
 }
