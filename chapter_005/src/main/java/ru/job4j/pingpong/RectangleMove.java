@@ -27,7 +27,6 @@ public class RectangleMove implements Runnable {
                 this.xDirection = 1;
             }
             this.rect.setX(this.rect.getX() + xDirection);
-
             try {
                 Thread.sleep(50);
             } catch (InterruptedException e) {
