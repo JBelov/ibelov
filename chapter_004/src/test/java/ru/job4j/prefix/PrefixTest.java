@@ -25,4 +25,11 @@ public class PrefixTest {
         String[] input = {"кот", "котейка", "котик", "синхрофазотрон", "сила"};
         assertThat(tester.find(input, 2), is("синхрофазотрон"));
     }
+
+    @Test
+    public void when234Found() {
+        Prefix tester = new Prefix();
+        String[] input = {"12345", "23", "234"};
+        assertThat(tester.find(input, 2), is("234"));
+    }
 }
