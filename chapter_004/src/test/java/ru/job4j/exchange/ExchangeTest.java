@@ -41,32 +41,32 @@ public class ExchangeTest {
         assertThat(
                 nyse.getBook("MSFT").toString(),
                 is(
-                        "------MSFT------\n"
-                                + "97.0  700\n"
-                                + "96.0  600\n"
-                                + "        100  92.0\n"
-                                + "        500  91.0\n"
+                        "700  97.0\n"
+                                + "600  96.0\n"
+                                + "     92.0  100\n"
+                                + "     91.0  500\n"
                 ));
         assertThat(
                 nyse.getBook("AAPL").toString(),
                 is(
-                        "------AAPL------\n"
-                                + "192.0  800\n"
-                                + "191.0  500\n"
-                                + "        100  185.0\n"
-                                + "        400  184.0\n"
-                                + "        1200  183.0\n"
+                        "800  192.0\n"
+                                + "500  191.0\n"
+                                + "     185.0  100\n"
+                                + "     184.0  400\n"
+                                + "     183.0  1200\n"
                 ));
         assertThat(
                 nyse.getBook("GOOG").toString(),
                 is(
-                        "------GOOG------\n"
-                                + "1192.0  800\n"
-                                + "1191.0  500\n"
-                                + "1000.0  3700\n"
+                        "800  1192.0\n"
+                                + "500  1191.0\n"
+                                + "3700  1000.0\n"
                 ));
+        System.out.println("----MSFT----");
         System.out.println(nyse.getBook("MSFT"));
+        System.out.println("----AAPL----");
         System.out.println(nyse.getBook("AAPL"));
+        System.out.println("----GOOG----");
         System.out.println(nyse.getBook("GOOG"));
     }
 }

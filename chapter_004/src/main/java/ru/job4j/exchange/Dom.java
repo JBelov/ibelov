@@ -11,10 +11,7 @@ import java.util.stream.Collectors;
  */
 public class Dom {
 
-    /**
-     * Domes ticket.
-     */
-    private String ticket;
+
     /**
      * List of Bids.
      */
@@ -24,21 +21,6 @@ public class Dom {
      */
     private LinkedList<Order> asks = new LinkedList<>();
 
-    /**
-     * Constructor.
-     *
-     * @param ticket
-     */
-    public Dom(String ticket) {
-        this.ticket = ticket;
-    }
-
-    /**
-     * @return ticket.
-     */
-    public String getTicket() {
-        return ticket;
-    }
 
     /**
      * Checks if the dom has order with this id.
@@ -139,12 +121,10 @@ public class Dom {
         TreeMap<Float, Integer> bidsDome = new TreeMap<>(combo(bids));
         TreeMap<Float, Integer> asksDome = new TreeMap<>(combo(asks));
         StringBuilder result = new StringBuilder();
-        result.append("------" + this.ticket + "------");
-        result.append(System.lineSeparator());
         asksDome.forEach((price, volume) ->
-                result.append(price + "  " + volume + System.lineSeparator()));
+                result.append(volume + "  " + price + System.lineSeparator()));
         bidsDome.forEach((price, volume) ->
-                result.append("        " + volume + "  " + price + System.lineSeparator()));
+                result.append("     " + price + "  " + volume + System.lineSeparator()));
         return result.toString();
     }
 }

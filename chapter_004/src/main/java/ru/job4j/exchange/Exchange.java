@@ -1,6 +1,6 @@
 package ru.job4j.exchange;
 
-import java.util.LinkedList;
+import java.util.HashMap;
 
 /**
  * @author Ivan Belov (ivan@belov.org)
@@ -8,7 +8,7 @@ import java.util.LinkedList;
  * @since 0.1
  */
 public class Exchange {
-    private LinkedList<Dom> domes = new LinkedList<>();
+    private HashMap<String, Dom> domes = new HashMap<>();
 
     /**
      * Add the new order to the Exchange.
@@ -17,15 +17,10 @@ public class Exchange {
      * @return true in case of successful added order.
      */
     public boolean add(Order order) {
-        String book = order.getTicket();
-        for (Dom dom : domes) {
-            if (dom.getTicket().equals(book)) {
-                return dom.add(order);
-            }
+        if (!domes.containsKey(order.getTicket())) {
+            domes.put(order.getTicket(), new Dom());
         }
-        domes.add(new Dom(order.getTicket()));
-        this.add(order);
-        return false;
+        return domes.get(order.getTicket()).add(order);
     }
 
     /**
@@ -35,12 +30,11 @@ public class Exchange {
      * @return true in case of successful deleting of order.
      */
     public boolean remove(String id) {
-        for (Dom dom : domes) {
-            if (dom.remove(id)) {
-                return true;
-            }
+        boolean result = false;
+        for (Dom dom : domes.values()) {
+            result |= dom.remove(id);
         }
-        return false;
+        return result;
     }
 
     /**
@@ -50,11 +44,6 @@ public class Exchange {
      * @return DOM or null.
      */
     public Dom getBook(String ticket) {
-        for (Dom dom : domes) {
-            if (dom.getTicket().equals(ticket)) {
-                return dom;
-            }
-        }
-        return null;
+        return domes.get(ticket);
     }
 }
