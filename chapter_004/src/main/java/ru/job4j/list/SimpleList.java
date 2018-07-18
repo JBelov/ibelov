@@ -4,27 +4,31 @@ import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import net.jcip.annotations.GuardedBy;
+import net.jcip.annotations.ThreadSafe;
+
 /**
  * @author Ivan Belov (ivan@belov.org)
  * @version $Id$
  * @since 0.1
  */
-
+@ThreadSafe
 public class SimpleList<E> implements Iterable<E> {
 
     /**
      * Creating the main container.
      */
+    @GuardedBy("this")
     private Object[] container;
     /**
      * Initializing the current position pointer.
      */
+    @GuardedBy("this")
     private int position = 0;
     /**
      * Initializing the modification counter.
      */
     private int modCount = 0;
-
     /**
      * Class constructor.
      *
@@ -39,7 +43,7 @@ public class SimpleList<E> implements Iterable<E> {
      *
      * @param value element to add.
      */
-    public void add(E value) {
+    public synchronized void add(E value) {
         if (position >= this.container.length) {
             Object[] temp = new Object[container.length + container.length / 2];
             System.arraycopy(container, 0, temp, 0, container.length);
@@ -55,7 +59,7 @@ public class SimpleList<E> implements Iterable<E> {
      * @param index index of element.
      * @return Element by its index.
      */
-    public E get(int index) {
+    public synchronized E get(int index) {
         if (index >= position) {
             throw new NoSuchElementException();
         }

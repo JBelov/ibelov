@@ -4,23 +4,29 @@ import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import net.jcip.annotations.GuardedBy;
+import net.jcip.annotations.ThreadSafe;
+
 /**
  * @author Ivan Belov (ivan@belov.org)
  * @version $Id$
  * @since 0.1
  */
-
+@ThreadSafe
 public class SimpleLinkedList<E> {
-
+    @GuardedBy("this")
     private int size = 0;
+    @GuardedBy("this")
     private int modCount = 0;
+    @GuardedBy("this")
     private Node<E> first;
+    @GuardedBy("this")
     private Node<E> last;
 
     /**
      * Add new element in the beginning of the list.
      */
-    public void add(E date) {
+    public synchronized void add(E date) {
         Node<E> newLink = new Node<>(date);
         if (this.size > 0) {
             this.first.previous = newLink;
@@ -37,7 +43,7 @@ public class SimpleLinkedList<E> {
     /**
      * Get element by its index.
      */
-    public E get(int index) {
+    public synchronized E get(int index) {
         if (index >= this.size) {
             throw new NoSuchElementException();
         }
@@ -58,7 +64,7 @@ public class SimpleLinkedList<E> {
     /**
      * Return the last added element and delete it from list.
      */
-    public E deleteLast() {
+    public synchronized E deleteLast() {
         if (this.size < 1) {
             throw new NoSuchElementException();
         }
@@ -71,7 +77,7 @@ public class SimpleLinkedList<E> {
     /**
      * Return the first added element and delete it from list.
      */
-    public E deleteFirst() {
+    public synchronized E deleteFirst() {
         if (this.size < 1) {
             throw new NoSuchElementException();
         }
