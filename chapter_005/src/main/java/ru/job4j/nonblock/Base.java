@@ -42,10 +42,14 @@ public class Base {
 
     @Override
     public String toString() {
-        return "Base{" +
-                "id=" + id +
-                ", version=" + version +
-                ", value='" + value + '\'' +
-                '}';
+        return "Base{"
+                + "id="
+                + id
+                + ", version="
+                + version
+                + ", value='"
+                + value
+                + '\''
+                + '}';
     }
 }
