@@ -17,18 +17,17 @@ public class Cache {
     }
 
     public void update(Base model) {
-        if (cache.containsKey(model.getId())) {
-            cache.computeIfPresent(model.getId(), (key, value) -> {
-                        if (model.getVersion() == value.getVersion()) {
-                            value.setValue(model.getValue());
-                            value.updateVersion();
-                        } else {
-                            throw new OptimisticException("wrong version");
-                        }
-                        return value;
+        cache.computeIfPresent(model.getId(), (key, value) -> {
+                    if (model.getVersion() == value.getVersion()) {
+                        value.setValue(model.getValue());
+                        value.updateVersion();
+                    } else {
+                        throw new OptimisticException("wrong version");
                     }
-            );
-        }
+                    return value;
+                }
+        );
+
     }
 
     public void delete(Base model) {
