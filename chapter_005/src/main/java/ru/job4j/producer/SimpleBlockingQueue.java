@@ -8,15 +8,12 @@ import java.util.Queue;
 
 @ThreadSafe
 public class SimpleBlockingQueue<T> {
-    private static int size = 3;
-    private boolean full = false;
-    private boolean empty = true;
-
+    private final static int size = 3;
     @GuardedBy("this")
     private Queue<T> queue = new LinkedList<>();
 
     public synchronized void offer(T value) {
-        while (full) {
+        while (queue.size() == size) {
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -25,13 +22,11 @@ public class SimpleBlockingQueue<T> {
         }
         queue.offer(value);
         System.out.println("added " + value);
-        full = queue.size() == size;
-        empty = queue.isEmpty();
         notify();
     }
 
     public synchronized T poll() {
-        while (empty) {
+        while (queue.isEmpty()) {
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -39,8 +34,6 @@ public class SimpleBlockingQueue<T> {
             }
         }
         T result = queue.poll();
-        full = queue.size() >= size;
-        empty = queue.isEmpty();
         notify();
         System.out.println("taken " + result);
         return result;
