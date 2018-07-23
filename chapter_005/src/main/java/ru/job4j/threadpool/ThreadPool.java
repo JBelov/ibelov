@@ -22,7 +22,7 @@ public class ThreadPool {
         }
     }
 
-    public synchronized void work(Runnable job) {
+    public void work(Runnable job) {
         tasks.offer(job);
     }
 
