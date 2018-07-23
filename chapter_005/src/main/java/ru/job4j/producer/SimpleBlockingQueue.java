@@ -8,12 +8,12 @@ import java.util.Queue;
 
 @ThreadSafe
 public class SimpleBlockingQueue<T> {
-    private final static int size = 3;
+    private final static int SIZE = 3;
     @GuardedBy("this")
     private Queue<T> queue = new LinkedList<>();
 
     public synchronized void offer(T value) {
-        while (queue.size() == size) {
+        while (queue.size() == SIZE) {
             try {
                 wait();
             } catch (InterruptedException e) {
