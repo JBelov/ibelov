@@ -18,12 +18,11 @@ public class Cache {
 
     public void update(Base model) {
         cache.computeIfPresent(model.getId(), (key, value) -> {
-                    if (model.getVersion() == value.getVersion()) {
-                        value.setValue(model.getValue());
-                        value.updateVersion();
-                    } else {
-                        throw new OptimisticException("wrong version");
-                    }
+            if (model.getVersion() != value.getVersion()) {
+                throw new OptimisticException("wrong version");
+            }
+            value.setValue(model.getValue());
+            value.updateVersion();
                     return value;
                 }
         );
@@ -37,6 +36,4 @@ public class Cache {
     public Base get(int id) {
         return cache.get(id);
     }
-
-
 }
