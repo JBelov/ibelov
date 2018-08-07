@@ -1,5 +1,10 @@
 package ru.job4j.bomberman;
 
+/**
+ * @author Ivan Belov (ivan@belov.org)
+ * @version $Id$
+ * @since 0.1
+ */
 public class Cell {
     private final int x;
     private final int y;
