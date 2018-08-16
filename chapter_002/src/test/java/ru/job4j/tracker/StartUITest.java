@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.sql.SQLException;
 import java.util.Date;
 
 import static org.hamcrest.core.Is.is;
@@ -30,29 +31,29 @@ public class StartUITest {
 
     @Before
     public void loadOutput() {
-        System.out.println("execute before method");
         System.setOut(new PrintStream(this.out));
     }
 
     @After
     public void backOutput() {
         System.setOut(this.stdout);
-        System.out.println("execute after method");
     }
 
 
     @Test
-    public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
+    public void whenUserAddItemThenTrackerHasNewItemWithSameName() throws SQLException {
         Tracker tracker = new Tracker();     // создаём Tracker
+        tracker.clearAll();
         Input input = new StubInput(new String[]{"0", "test name", "desc", "6"});   //создаём StubInput с последовательностью действий
         new StartUI(input, tracker).init();     //   создаём StartUI и вызываем метод init()
         assertThat(tracker.getAll().get(0).getName(), is("test name")); // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
     }
 
     @Test
-    public void whenUpdateThenTrackerHasUpdatedValue() {
+    public void whenUpdateThenTrackerHasUpdatedValue() throws SQLException {
         // создаём Tracker
         Tracker tracker = new Tracker();
+        tracker.clearAll();
         //Напрямую добавляем заявку
         Item item = tracker.add(new Item());
         //создаём StubInput с последовательностью действий
@@ -64,9 +65,10 @@ public class StartUITest {
     }
 
     @Test
-    public void whenDeleteThenValueIsNull() {
+    public void whenDeleteThenValueIsNull() throws SQLException {
         // создаём Tracker
         Tracker tracker = new Tracker();
+        tracker.clearAll();
         //Напрямую добавляем две заявки
         Item item = tracker.add(new Item("test name", "desc"));
         Item item2 = tracker.add(new Item("test name 2", "desc 2"));
@@ -79,9 +81,10 @@ public class StartUITest {
     }
 
     @Test
-    public void whenGetAllItemsTheyAreHere() {
+    public void whenGetAllItemsTheyAreHere() throws SQLException {
         // создаём Tracker
         Tracker tracker = new Tracker();
+        tracker.clearAll();
         //Напрямую добавляем две заявки.
         Item item = tracker.add(new Item("test name", "desc"));
         Item item2 = tracker.add(new Item("test name 2", "desc 2"));
@@ -115,9 +118,10 @@ public class StartUITest {
     }
 
     @Test
-    public void whenFindItemByNameItFound() {
+    public void whenFindItemByNameItFound() throws SQLException {
         // создаём Tracker
         Tracker tracker = new Tracker();
+        tracker.clearAll();
         //Напрямую добавляем заявку.
         Item item = tracker.add(new Item("test name", "desc"));
         //создаём StubInput с последовательностью действий по поиску заявки по имени.
@@ -146,9 +150,10 @@ public class StartUITest {
     }
 
     @Test
-    public void whenFindItemByIdItFound() {
+    public void whenFindItemByIdItFound() throws SQLException {
         // создаём Tracker
         Tracker tracker = new Tracker();
+        tracker.clearAll();
         //Напрямую добавляем заявку.
         Item item = tracker.add(new Item("test name", "desc"));
         //создаём StubInput с последовательностью действий по поиску заявки по id.

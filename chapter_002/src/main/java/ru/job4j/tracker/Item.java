@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.Objects;
+
 /**
  * @author Ivan Belov (ivan@belov.org)
  * @version $Id$
@@ -45,5 +47,28 @@ public class Item {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (this.getClass() != obj.getClass()) {
+            return false;
+        }
+        Item other = (Item) obj;
+        return Objects.equals(name, other.name)
+                && id == other.id
+                && desc == other.desc
+                && created == other.created;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, id, created, desc);
     }
 }
