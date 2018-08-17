@@ -1,9 +1,12 @@
 INSERT INTO roles(name) values ('editor');
 INSERT INTO roles(name) values ('reader');
-INSERT INTO rules(name, role_id) values ('create', 1);
-INSERT INTO rules(name, role_id) values ('delete', 1);
-INSERT INTO rules(name, role_id) values ('read', 1);
-INSERT INTO rules(name, role_id) values ('read', 2);
+INSERT INTO rules (name) VALUES ('create');
+INSERT INTO rules (name) VALUES ('delete');
+INSERT INTO rules (name) VALUES ('read');
+INSERT INTO roles_to_rules (role_id, rule_id) VALUES (1, 1);
+INSERT INTO roles_to_rules (role_id, rule_id) VALUES (1, 2);
+INSERT INTO roles_to_rules (role_id, rule_id) VALUES (1, 3);
+INSERT INTO roles_to_rules (role_id, rule_id) VALUES (2, 3);
 INSERT INTO states(name) values ('new');
 INSERT INTO states(name) values ('working');
 INSERT INTO categories(name) values ('low');

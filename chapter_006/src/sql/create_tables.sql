@@ -1,14 +1,18 @@
 \c uml_db
 
 BEGIN;
-CREATE TABLE roles(
-        id serial primary key,
-        name text
+CREATE TABLE rules (
+  id   SERIAL PRIMARY KEY,
+  name TEXT
 );
-CREATE TABLE rules(
-        id serial primary key,
-        name text,
-        role_id int REFERENCES roles(id)
+CREATE TABLE roles (
+  id   SERIAL PRIMARY KEY,
+  name TEXT
+);
+CREATE TABLE roles_to_rules (
+  id      SERIAL PRIMARY KEY,
+  role_id INT REFERENCES roles (id),
+  rule_id INT REFERENCES rules (id)
 );
 CREATE TABLE states(
         id serial primary key,
