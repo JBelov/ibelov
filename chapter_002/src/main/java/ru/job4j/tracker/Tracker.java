@@ -55,14 +55,6 @@ public class Tracker implements AutoCloseable {
             stat.execute();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
-        } finally {
-            if (stat != null) {
-                try {
-                    stat.close();
-                } catch (SQLException e) {
-                    LOGGER.error(e.getMessage(), e);
-                }
-            }
         }
     }
 
@@ -79,14 +71,6 @@ public class Tracker implements AutoCloseable {
             }
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
-        } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    LOGGER.error(e.getMessage(), e);
-                }
-            }
         }
     }
 
@@ -99,14 +83,6 @@ public class Tracker implements AutoCloseable {
             init();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
-        } finally {
-            if (stat != null) {
-                try {
-                    stat.close();
-                } catch (SQLException e) {
-                    LOGGER.error(e.getMessage(), e);
-                }
-            }
         }
     }
 
@@ -126,14 +102,6 @@ public class Tracker implements AutoCloseable {
             stat.execute();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
-        } finally {
-            if (stat != null) {
-                try {
-                    stat.close();
-                } catch (SQLException e) {
-                    LOGGER.error(e.getMessage(), e);
-                }
-            }
         }
         return item;
     }
@@ -165,14 +133,6 @@ public class Tracker implements AutoCloseable {
             stat.execute();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
-        } finally {
-            if (stat != null) {
-                try {
-                    stat.close();
-                } catch (SQLException e) {
-                    LOGGER.error(e.getMessage(), e);
-                }
-            }
         }
     }
 
@@ -221,14 +181,6 @@ public class Tracker implements AutoCloseable {
             resultSet.close();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
-        } finally {
-            if (stat != null) {
-                try {
-                    stat.close();
-                } catch (SQLException e) {
-                    LOGGER.error(e.getMessage(), e);
-                }
-            }
         }
         return result;
     }
@@ -255,14 +207,6 @@ public class Tracker implements AutoCloseable {
             resultSet.close();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
-        } finally {
-            if (stat != null) {
-                try {
-                    stat.close();
-                } catch (SQLException e) {
-                    LOGGER.error(e.getMessage(), e);
-                }
-            }
         }
         return result;
     }
@@ -288,14 +232,6 @@ public class Tracker implements AutoCloseable {
             resultSet.close();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
-        } finally {
-            if (stat != null) {
-                try {
-                    stat.close();
-                } catch (SQLException e) {
-                    LOGGER.error(e.getMessage(), e);
-                }
-            }
         }
         return result;
     }
