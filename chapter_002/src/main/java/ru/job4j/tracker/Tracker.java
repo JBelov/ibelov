@@ -51,8 +51,7 @@ public class Tracker implements AutoCloseable {
      * Tracker initialization. Creates Items table in DB if it not exists.
      */
     private void init() {
-        try {
-            stat = conn.prepareStatement(createTable);
+        try (PreparedStatement stat = conn.prepareStatement(createTable)) {
             stat.execute();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
@@ -71,8 +70,7 @@ public class Tracker implements AutoCloseable {
      * Checks DB existence. Or create new DB in case of no ready DB.
      */
     private void checkOrCreateBD() {
-        try {
-            conn = DriverManager.getConnection(url, user, password);
+        try (Connection conn = DriverManager.getConnection(url, user, password)) {
             Statement statement = conn.createStatement();
             ResultSet resultSet = statement.executeQuery(checkDB);
             resultSet.next();
@@ -96,8 +94,7 @@ public class Tracker implements AutoCloseable {
      * Clears all the data from Items table. It useful in case of automatic testing.
      */
     public void clearAll() {
-        try {
-            stat = conn.prepareStatement(clearTable);
+        try (PreparedStatement stat = conn.prepareStatement(clearTable)) {
             stat.execute();
             init();
         } catch (SQLException e) {
@@ -120,10 +117,8 @@ public class Tracker implements AutoCloseable {
      */
     public Item add(Item item) {
         item.setId(this.generateId());
-        try {
-            stat = conn.prepareStatement(
-                    "INSERT INTO items(id, name, description, created) VALUES (?, ?, ?, ?)"
-            );
+        try (PreparedStatement stat = conn.prepareStatement(
+                "INSERT INTO items(id, name, description, created) VALUES (?, ?, ?, ?)")) {
             stat.setString(1, item.getId());
             stat.setString(2, item.getName());
             stat.setString(3, item.getDesc());
@@ -161,10 +156,8 @@ public class Tracker implements AutoCloseable {
      * @param item item to replace it.
      */
     public void replace(String id, Item item) {
-        try {
-            stat = conn.prepareStatement(
-                    "UPDATE items SET name = ?, description = ?, created = ? WHERE id = ?"
-            );
+        try (PreparedStatement stat = conn.prepareStatement(
+                "UPDATE items SET name = ?, description = ?, created = ? WHERE id = ?")) {
             stat.setString(4, id);
             stat.setString(1, item.getName());
             stat.setString(2, item.getDesc());
@@ -189,10 +182,8 @@ public class Tracker implements AutoCloseable {
      * @param id of item to be deleted.
      */
     public void delete(String id) {
-        try {
-            stat = conn.prepareStatement(
-                    "DELETE FROM items WHERE id = ?"
-            );
+        try (PreparedStatement stat = conn.prepareStatement(
+                "DELETE FROM items WHERE id = ?")) {
             stat.setString(1, id);
             stat.execute();
         } catch (SQLException e) {
@@ -216,10 +207,8 @@ public class Tracker implements AutoCloseable {
      */
     public Item findById(String id) {
         Item result = null;
-        try {
-            stat = conn.prepareStatement(
-                    "SELECT * FROM items WHERE id = ?"
-            );
+        try (PreparedStatement stat = conn.prepareStatement(
+                "SELECT * FROM items WHERE id = ?")) {
             stat.setString(1, id);
             resultSet = stat.executeQuery();
             while (resultSet.next()) {
@@ -252,10 +241,8 @@ public class Tracker implements AutoCloseable {
      */
     public Item findByName(String name) {
         Item result = null;
-        try {
-            stat = conn.prepareStatement(
-                    "SELECT * FROM items WHERE name = ?"
-            );
+        try (PreparedStatement stat = conn.prepareStatement(
+                "SELECT * FROM items WHERE name = ?")) {
             stat.setString(1, name);
             resultSet = stat.executeQuery();
             while (resultSet.next()) {
@@ -287,10 +274,8 @@ public class Tracker implements AutoCloseable {
      */
     public ArrayList<Item> getAll() {
         ArrayList<Item> result = new ArrayList<>();
-        try {
-            stat = conn.prepareStatement(
-                    "SELECT * FROM items"
-            );
+        try (PreparedStatement stat = conn.prepareStatement(
+                "SELECT * FROM items")) {
             resultSet = stat.executeQuery();
             while (resultSet.next()) {
                 Item item = new Item(
