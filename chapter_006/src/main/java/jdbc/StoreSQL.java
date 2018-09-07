@@ -97,8 +97,8 @@ public class StoreSQL implements AutoCloseable {
 
     public List<Entry> getList() {
         List<Entry> list = new LinkedList<>();
-        try (Statement statement = conn.createStatement()) {
-            ResultSet resultSet = statement.executeQuery(getAll);
+        try (Statement statement = conn.createStatement();
+             ResultSet resultSet = statement.executeQuery(getAll)) {
             while (resultSet.next()) {
                 list.add(new Entry(resultSet.getInt(1)));
             }
