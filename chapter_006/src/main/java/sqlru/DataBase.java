@@ -31,8 +31,7 @@ public class DataBase {
     /**
      * Constructor.
      **/
-    DataBase() {
-        ResourceBundle resource = App.getResource();
+    DataBase(ResourceBundle resource) {
         url = resource.getString("url");
         user = resource.getString("user");
         password = resource.getString("password");

@@ -12,37 +12,8 @@ import java.util.ResourceBundle;
  * @since 0.1
  */
 public class App {
+
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(App.class);
-    private static ResourceBundle resource;
-    private static DataBase dataBase;
-    private static Parser parser;
-
-    /**
-     * Returns current database class.
-     *
-     * @return database.
-     */
-    public static DataBase getDataBase() {
-        return dataBase;
-    }
-
-    /**
-     * Returns current parser class.
-     *
-     * @return database.
-     */
-    public static Parser getParser() {
-        return parser;
-    }
-
-    /**
-     * Returns current resources bundle.
-     *
-     * @return database.
-     */
-    public static ResourceBundle getResource() {
-        return resource;
-    }
 
     public static void main(String[] args) {
         String config;
@@ -51,11 +22,9 @@ public class App {
         } else {
             config = "app";
         }
-
-        resource = ResourceBundle.getBundle(config);
-        dataBase = new DataBase();
-        parser = new Parser();
-
+        ResourceBundle resource = ResourceBundle.getBundle(config);
+        DataBase dataBase = new DataBase(resource);
+        Parser parser = new Parser(resource);
         String cron = resource.getString("cron");
         SchedulerFactory schedulerFactory = new StdSchedulerFactory();
         Scheduler scheduler = null;
@@ -64,7 +33,6 @@ public class App {
         } catch (SchedulerException e) {
             e.printStackTrace();
         }
-
         JobDetail job = JobBuilder.newJob(Job.class)
                 .withIdentity("parser")
                 .build();
@@ -74,6 +42,8 @@ public class App {
                 .forJob("parser")
                 .build();
         try {
+            scheduler.getContext().put("parser", parser);
+            scheduler.getContext().put("database", dataBase);
             scheduler.scheduleJob(job, trigger);
             scheduler.start();
         } catch (SchedulerException e) {

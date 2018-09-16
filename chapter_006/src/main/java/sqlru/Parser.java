@@ -28,8 +28,7 @@ public class Parser {
     /**
      * Constructor. Loads resources.
      */
-    Parser() {
-        ResourceBundle resource = App.getResource();
+    Parser(ResourceBundle resource) {
         this.find = resource.getString("find");
         this.ignore = resource.getString("ignore");
     }
