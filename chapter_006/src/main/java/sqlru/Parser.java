@@ -41,11 +41,7 @@ public class Parser {
      */
     List<Item> parse(Timestamp lastStoredDate) {
 
-        int id;
         List<Item> result = new LinkedList<>();
-        String subject;
-        String url;
-        Timestamp created;
         for (int i = 1; i < 100; i++) {
             try {
                 Document doc = Jsoup.connect("http://www.sql.ru/forum/job-offers/" + i).get();
@@ -53,17 +49,21 @@ public class Parser {
                 int skip = 3;
                 for (Element el : elements) {
                     if (skip-- <= 0) {
-                        subject = el.child(0).text();
-                        url = el.child(0).attr("href");
-                        created = parseDate(el.parent().child(5).text());
-                        if (lastStoredDate.after(created) && !subject.contains("Важно:")) {
+                        if (lastStoredDate.after(parseDate(el.parent().child(5).text())) && !el.child(0).text().contains("Важно:")) {
                             break;
                         }
-                        if (subject.toLowerCase().contains(find.toLowerCase())
-                                && !subject.toLowerCase().contains(ignore.toLowerCase())) {
-                            id = Integer.parseInt(url.substring(24, 31));
-                            result.add(new Item(id, url, subject, created));
-                            System.out.printf("id %d \n %s \n %s \n %s \n", id, url, subject, created);
+                        if (el.child(0).text().toLowerCase().contains(find.toLowerCase())
+                                && !el.child(0).text().toLowerCase().contains(ignore.toLowerCase())) {
+                            result.add(new Item(
+                                    Integer.parseInt(el.child(0).attr("href").substring(24, 31)),
+                                    el.child(0).attr("href"),
+                                    el.child(0).text(),
+                                    parseDate(el.parent().child(5).text())));
+                            System.out.printf("id %d \n %s \n %s \n %s \n",
+                                    Integer.parseInt(el.child(0).attr("href").substring(24, 31)),
+                                    el.child(0).attr("href"),
+                                    el.child(0).text(),
+                                    parseDate(el.parent().child(5).text()));
                         }
                     }
                 }
