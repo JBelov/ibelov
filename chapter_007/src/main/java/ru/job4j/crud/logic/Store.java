@@ -1,4 +1,6 @@
-package ru.job4j.crud;
+package ru.job4j.crud.logic;
+
+import ru.job4j.crud.models.User;
 
 import java.util.List;
 import java.util.Optional;

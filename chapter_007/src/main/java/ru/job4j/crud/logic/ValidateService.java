@@ -1,4 +1,6 @@
-package ru.job4j.crud;
+package ru.job4j.crud.logic;
+
+import ru.job4j.crud.models.User;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,12 +20,12 @@ public class ValidateService {
 
     private final Store<User> logic = MemoryStore.getInstance();
 
-    synchronized Boolean add(User user) {
+    synchronized public Boolean add(User user) {
         logic.add(user);
         return true;
     }
 
-    synchronized Boolean update(String name, String login, String email, int id) {
+    synchronized public Boolean update(String name, String login, String email, int id) {
         boolean success = false;
         if (logic.findById(id).isPresent()) {
             logic.update(name, login, email, id);
@@ -32,7 +34,7 @@ public class ValidateService {
         return success;
     }
 
-    synchronized Boolean delete(int id) {
+    synchronized public Boolean delete(int id) {
         boolean success = false;
         if (logic.findById(id).isPresent()) {
             logic.delete(id);
@@ -41,11 +43,11 @@ public class ValidateService {
         return success;
     }
 
-    List<User> findAll() {
+    public List<User> findAll() {
         return logic.findAll();
     }
 
-    Optional<User> findById(int id) {
+    public Optional<User> findById(int id) {
         return logic.findById(id);
     }
 }

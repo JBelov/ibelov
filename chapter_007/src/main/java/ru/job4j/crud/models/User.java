@@ -1,4 +1,4 @@
-package ru.job4j.crud;
+package ru.job4j.crud.models;
 
 import java.sql.Timestamp;
 import java.util.Objects;
@@ -24,15 +24,12 @@ public class User {
      * @param login login
      * @param email email
      */
-    User(String name, String login, String email) {
+    public User(String name, String login, String email) {
         this.id = nextId.getAndIncrement();
         this.name = name;
         this.login = login;
         this.email = email;
         this.createDate = new Timestamp(System.currentTimeMillis());
-    }
-
-    public User() {
     }
 
     public int getId() {
