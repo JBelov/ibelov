@@ -5,14 +5,6 @@
          http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
          version="2.4">
     <servlet>
-        <servlet-name>UsersServlet</servlet-name>
-        <servlet-class>ru.job4j.crud.servlets.UsersServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>UsersServlet</servlet-name>
-        <url-pattern>/crud/list</url-pattern>
-    </servlet-mapping>
-    <servlet>
         <servlet-name>UserCreateServlet</servlet-name>
         <servlet-class>ru.job4j.crud.servlets.UserCreateServlet</servlet-class>
     </servlet>

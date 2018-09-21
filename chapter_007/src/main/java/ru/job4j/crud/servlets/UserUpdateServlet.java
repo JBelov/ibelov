@@ -10,19 +10,26 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/**
+ * @author Ivan Belov (ivan@belov.org)
+ * @version $Id$
+ * @since 0.1
+ */
 public class UserUpdateServlet extends HttpServlet {
 
     private final ValidateService validateService = ValidateService.getInstance();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getParameter("action").equals("delete")) {
-            validateService.delete(Integer.parseInt(request.getParameter("id")));
+            validateService.delete(request.getParameter("id"));
         } else {
             validateService.update(
-                    request.getParameter("name"),
-                    request.getParameter("login"),
-                    request.getParameter("email"),
-                    Integer.parseInt(request.getParameter("id"))
+                    new User(
+                            request.getParameter("id"),
+                            request.getParameter("name"),
+                            request.getParameter("login"),
+                            request.getParameter("email")
+                    )
             );
         }
         response.sendRedirect("/");

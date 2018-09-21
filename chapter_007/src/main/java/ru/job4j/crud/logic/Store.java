@@ -14,12 +14,12 @@ public interface Store<T extends User> {
 
     void add(T user);
 
-    void update(String name, String login, String email, int id);
+    void update(T user);
 
-    void delete(int id);
+    void delete(String id);
 
     List<T> findAll();
 
-    Optional<T> findById(int id);
+    Optional<T> findById(String id);
 
 }

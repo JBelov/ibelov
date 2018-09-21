@@ -12,6 +12,11 @@ import java.io.PrintWriter;
 import java.io.Writer;
 import java.util.function.Function;
 
+/**
+ * @author Ivan Belov (ivan@belov.org)
+ * @version $Id$
+ * @since 0.1
+ */
 public class UserCreateServlet extends HttpServlet {
 
     private final ValidateService validateService = ValidateService.getInstance();

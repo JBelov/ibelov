@@ -15,11 +15,11 @@
     <input type="hidden" name="id" value="<%=request.getParameter("id")%>"/>
     <input type="hidden" name="action" value="update"/>
     Name: <input type="text" name="name" title="Name"
-                 value="<%=ValidateService.getInstance().findById(Integer.parseInt(request.getParameter("id"))).get().getName()%>"/><br/>
+                 value="<%=ValidateService.getInstance().findById(request.getParameter("id")).get().getName()%>"/><br/>
     Login: <input type="text" name="login" title="Login"
-                  value="<%=ValidateService.getInstance().findById(Integer.parseInt(request.getParameter("id"))).get().getLogin()%>"/><br/>
+                  value="<%=ValidateService.getInstance().findById(request.getParameter("id")).get().getLogin()%>"/><br/>
     Email: <input type="text" name="email" title="Email"
-                  value="<%=ValidateService.getInstance().findById(Integer.parseInt(request.getParameter("id"))).get().getEmail()%>"/><br/>
+                  value="<%=ValidateService.getInstance().findById(request.getParameter("id")).get().getEmail()%>"/><br/>
     <input type="submit"/>
 </form>
 </body>

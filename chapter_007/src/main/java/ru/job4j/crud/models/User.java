@@ -10,8 +10,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @since 0.1
  */
 public class User {
-    private static volatile AtomicInteger nextId = new AtomicInteger(1);
-    private int id;
+    private String id;
     private String name;
     private String login;
     private String email;
@@ -25,18 +24,25 @@ public class User {
      * @param email email
      */
     public User(String name, String login, String email) {
-        this.id = nextId.getAndIncrement();
         this.name = name;
         this.login = login;
         this.email = email;
         this.createDate = new Timestamp(System.currentTimeMillis());
     }
 
-    public int getId() {
+    public User(String id, String name, String login, String email) {
+        this(name, login, email);
+        this.id = id;
+    }
+
+    public User() {
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

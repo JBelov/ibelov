@@ -2,8 +2,11 @@ package ru.job4j.crud.logic;
 
 import ru.job4j.crud.models.User;
 
+import javax.jws.soap.SOAPBinding;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 /**
  * @author Ivan Belov (ivan@belov.org)
@@ -12,29 +15,37 @@ import java.util.Optional;
  */
 public class ValidateService {
 
+    private static final Random RN = new Random(100);
+
     private static ValidateService ourInstance = new ValidateService();
 
     public static ValidateService getInstance() {
         return ourInstance;
     }
 
-    private final Store<User> logic = MemoryStore.getInstance();
+    private final Store<User> logic = DbStore.getInstance();
+
+    private String generateId() {
+        return String.valueOf(System.currentTimeMillis() + RN.nextInt());
+    }
+
 
     synchronized public Boolean add(User user) {
+        user.setId(generateId());
         logic.add(user);
         return true;
     }
 
-    synchronized public Boolean update(String name, String login, String email, int id) {
+    synchronized public Boolean update(User user) {
         boolean success = false;
-        if (logic.findById(id).isPresent()) {
-            logic.update(name, login, email, id);
+        if (logic.findById(user.getId()).isPresent()) {
+            logic.update(user);
             success = true;
         }
         return success;
     }
 
-    synchronized public Boolean delete(int id) {
+    synchronized public Boolean delete(String id) {
         boolean success = false;
         if (logic.findById(id).isPresent()) {
             logic.delete(id);
@@ -47,7 +58,7 @@ public class ValidateService {
         return logic.findAll();
     }
 
-    public Optional<User> findById(int id) {
+    public Optional<User> findById(String id) {
         return logic.findById(id);
     }
 }
