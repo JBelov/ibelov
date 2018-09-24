@@ -91,7 +91,7 @@ public class DbStore implements Store<User> {
         ArrayList<User> users = new ArrayList<>();
         try (Connection connection = SOURCE.getConnection();
              PreparedStatement st = connection.prepareStatement(
-                     "SELECT * FROM users")) {
+                     "SELECT * FROM users ORDER BY id")) {
             resultSet = st.executeQuery();
             while (resultSet.next()) {
                 User user = new User(
